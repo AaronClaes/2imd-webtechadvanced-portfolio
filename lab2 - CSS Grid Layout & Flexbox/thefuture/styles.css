@@ -4,7 +4,6 @@
 
 .container {
   display: grid;
-  grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr 1fr;
   gap: 0.5rem;
 }
 
@@ -14,16 +13,35 @@ div {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .container__bluebox {
   background-color: rgb(49, 201, 228);
-  grid-column: 3/3;
-  grid-row: 1/4;
 }
 
 .container__yellowbox {
   background-color: rgb(255, 255, 0);
-  grid-column: 4/6;
-  grid-row: 2/4;
+}
+
+@media (min-width: 40em) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 60em) {
+  .container {
+    grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .container__bluebox {
+    grid-column: 3/3;
+    grid-row: 1/4;
+  }
+
+  .container__yellowbox {
+    grid-column: 4/6;
+    grid-row: 2/4;
+  }
 }
