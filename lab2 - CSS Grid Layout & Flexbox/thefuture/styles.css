@@ -5,10 +5,15 @@
 .container {
   display: grid;
   grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr 1fr;
+  gap: 0.5rem;
 }
 
 div {
   background-color: rgb(235, 86, 86);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container__bluebox {
