@@ -13,8 +13,12 @@ div {
 
 .container__bluebox {
   background-color: rgb(49, 201, 228);
+  grid-column: 3/3;
+  grid-row: 1/4;
 }
 
 .container__yellowbox {
   background-color: rgb(255, 255, 0);
+  grid-column: 4/6;
+  grid-row: 2/4;
 }
