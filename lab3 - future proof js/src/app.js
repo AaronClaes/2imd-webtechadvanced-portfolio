@@ -20,7 +20,17 @@ class Note {
     // this function should append the note to the screen somehow
   }
 
-  saveToStorage() {
+  saveToStorage(note) {
+    const storage = window.localStorage;
+    let notes = [];
+    if (storage.length === 0) {
+      notes.push(note);
+      storage.setItem("notes", JSON.stringify(notes));
+    } else {
+      notes = JSON.parse(storage.getItem("notes"));
+      notes.push(note);
+      storage.setItem("notes", JSON.stringify(notes));
+    }
     // HINT🤩
     // localStorage only supports strings, not arrays
     // if you want to store arrays, look at JSON.parse and JSON.stringify
@@ -56,10 +66,10 @@ class App {
     if (e.key === "Enter") {
       e.preventDefault();
       const value = this.txtTodo.value;
-      console.log(e);
+      this.reset();
       let note = new Note(value);
       note.add(note.element);
-      this.reset();
+      note.saveToStorage(note.title);
     }
     // this function should create a new note by using the Note() class
     // HINT🤩

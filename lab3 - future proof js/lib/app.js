@@ -32,9 +32,21 @@ var Note = /*#__PURE__*/function () {
     }
   }, {
     key: "saveToStorage",
-    value: function saveToStorage() {// HINT🤩
+    value: function saveToStorage(note) {
+      var storage = window.localStorage;
+      var notes = [];
+
+      if (storage.length === 0) {
+        notes.push(note);
+        storage.setItem("notes", JSON.stringify(notes));
+      } else {
+        notes = JSON.parse(storage.getItem("notes"));
+        notes.push(note);
+        storage.setItem("notes", JSON.stringify(notes));
+      } // HINT🤩
       // localStorage only supports strings, not arrays
       // if you want to store arrays, look at JSON.parse and JSON.stringify
+
     }
   }, {
     key: "remove",
@@ -72,10 +84,10 @@ var App = /*#__PURE__*/function () {
       if (e.key === "Enter") {
         e.preventDefault();
         var value = this.txtTodo.value;
-        console.log(e);
+        this.reset();
         var note = new Note(value);
         note.add(note.element);
-        this.reset();
+        note.saveToStorage(note.title);
       } // this function should create a new note by using the Note() class
       // HINT🤩
       // note.saveToStorage();
