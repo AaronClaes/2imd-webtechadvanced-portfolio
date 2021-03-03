@@ -10,19 +10,24 @@ var Note = /*#__PURE__*/function () {
   function Note(title) {
     _classCallCheck(this, Note);
 
-    this.title = title; // HINT🤩 this.element = this.createElement(title);
+    this.title = title; // HINT🤩
+
+    this.element = this.createElement(title);
   }
 
   _createClass(Note, [{
     key: "createElement",
     value: function createElement(title) {
-      var newNote = document.createElement("li"); // HINT🤩 newNote.addEventListener('click', this.remove.bind(newNote));
+      var newNote = document.createElement("li");
+      newNote.innerHTML = title; // HINT🤩 newNote.addEventListener('click', this.remove.bind(newNote));
 
       return newNote;
     }
   }, {
     key: "add",
-    value: function add() {// HINT🤩
+    value: function add(note) {
+      var list = document.querySelector("#taskList");
+      list.appendChild(note); // HINT🤩
       // this function should append the note to the screen somehow
     }
   }, {
@@ -64,14 +69,15 @@ var App = /*#__PURE__*/function () {
   }, {
     key: "createNote",
     value: function createNote(e) {
-      e.preventDefault();
-
       if (e.key === "Enter") {
-        console.log("ADD NOTE");
+        e.preventDefault();
+        var value = this.txtTodo.value;
+        console.log(e);
+        var note = new Note(value);
+        note.add(note.element);
         this.reset();
       } // this function should create a new note by using the Note() class
       // HINT🤩
-      // note.add();
       // note.saveToStorage();
       // clear the text field with .reset in this class
       // if (e.key === "Enter")
