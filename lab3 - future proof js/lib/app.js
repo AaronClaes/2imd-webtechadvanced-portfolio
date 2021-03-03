@@ -52,9 +52,13 @@ var Note = /*#__PURE__*/function () {
   }, {
     key: "remove",
     value: function remove() {
-      console.log("click");
       var list = document.querySelector("#taskList");
-      list.removeChild(this); // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
+      list.removeChild(this);
+      var storage = window.localStorage;
+      var notes = JSON.parse(storage.getItem("notes"));
+      var index = notes.indexOf(this.innerHTML);
+      notes.splice(index, 1);
+      storage.setItem("notes", JSON.stringify(notes)); // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
       // in this function, 'this' will refer to the current note element
       // .removeChild(this)
       // remove the item from screen and from localstorage
