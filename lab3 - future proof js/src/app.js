@@ -19,7 +19,7 @@ class Note {
   saveToStorage(note) {
     const storage = window.localStorage;
     let notes = [];
-    if (storage.length === 0) {
+    if (storage.notes === undefined) {
       notes.push(note);
       storage.setItem("notes", JSON.stringify(notes));
     } else {
@@ -54,7 +54,7 @@ class App {
   loadNotesFromStorage() {
     const storage = window.localStorage;
     const notes = JSON.parse(storage.getItem("notes"));
-    if (notes != null) {
+    if (notes !== undefined) {
       notes.forEach((note) => {
         const loadNote = new Note(note);
         loadNote.add(loadNote.element);
