@@ -54,10 +54,19 @@ class App {
     this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
     // read up on .bind() -> we need to pass the current meaning of this to the eventListener
     // when the app loads, we can show previously saved noted from localstorage
-    // this.loadNotesFromStorage();
+    this.loadNotesFromStorage();
   }
 
   loadNotesFromStorage() {
+    const storage = window.localStorage;
+    const notes = JSON.parse(storage.getItem("notes"));
+
+    notes.forEach((note) => {
+      const list = document.querySelector("#taskList");
+      let noteElement = document.createElement("li");
+      noteElement.innerHTML = note;
+      list.appendChild(noteElement);
+    });
     // HINT🤩
     // load all notes from storage here and add them to the screen
   }
