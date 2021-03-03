@@ -19,8 +19,9 @@ var Note = /*#__PURE__*/function () {
     key: "createElement",
     value: function createElement(title) {
       var newNote = document.createElement("li");
-      newNote.innerHTML = title; // HINT🤩 newNote.addEventListener('click', this.remove.bind(newNote));
+      newNote.innerHTML = title; // HINT🤩
 
+      newNote.addEventListener("click", this.remove.bind(newNote));
       return newNote;
     }
   }, {
@@ -50,7 +51,10 @@ var Note = /*#__PURE__*/function () {
     }
   }, {
     key: "remove",
-    value: function remove() {// HINT🤩 the meaning of 'this' was set by bind() in the createElement function
+    value: function remove() {
+      console.log("click");
+      var list = document.querySelector("#taskList");
+      list.removeChild(this); // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
       // in this function, 'this' will refer to the current note element
       // .removeChild(this)
       // remove the item from screen and from localstorage
@@ -80,10 +84,8 @@ var App = /*#__PURE__*/function () {
       var storage = window.localStorage;
       var notes = JSON.parse(storage.getItem("notes"));
       notes.forEach(function (note) {
-        var list = document.querySelector("#taskList");
-        var noteElement = document.createElement("li");
-        noteElement.innerHTML = note;
-        list.appendChild(noteElement);
+        var loadNote = new Note(note);
+        loadNote.add(loadNote.element);
       }); // HINT🤩
       // load all notes from storage here and add them to the screen
     }
