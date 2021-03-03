@@ -54,11 +54,12 @@ class App {
   loadNotesFromStorage() {
     const storage = window.localStorage;
     const notes = JSON.parse(storage.getItem("notes"));
-
-    notes.forEach((note) => {
-      const loadNote = new Note(note);
-      loadNote.add(loadNote.element);
-    });
+    if (notes != null) {
+      notes.forEach((note) => {
+        const loadNote = new Note(note);
+        loadNote.add(loadNote.element);
+      });
+    }
   }
 
   createNote(e) {
