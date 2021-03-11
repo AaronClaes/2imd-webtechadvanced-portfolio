@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.75px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.1rem;
+}
+
+.container {
+  width: 336px;
+  height: 280px;
+}
+
+.top {
+  height: 75%;
+  background-image: url("../images/raining.jpg");
+  background-size: cover;
+}
+
+.header {
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.header__logo {
+  padding: 0.5rem;
+}
+
+.header__button {
+  font-size: 0.9rem;
+  background-color: #df1c1c;
+  border-radius: 7px;
+  padding: 0.3rem 0.5rem;
+  margin: 0.5rem;
+}
+
+.main {
+  padding: 0.25rem 0 0.25rem 0.75rem;
+
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.footer {
+  background: rgba(2, 2, 2, 0.9);
+  height: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.footer__play-button {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.75rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(223, 28, 28, 0.7);
+}
+
+.footer__play-button:hover {
+  color: rgba(223, 28, 28, 1);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.footer__play-button:hover {
+  color: rgba(223, 28, 28, 1);
+}
+
+.footer__play-button-background {
+  background-size: cover;
+  background-image: url("../images/artist-icon.jpg");
+
+  height: 100%;
+}
+
+.fa-play {
+  margin: 0 1rem;
+}
+
+.footer__details {
+  width: 100%;
+  padding: 0 0 0 0.75rem;
+}
+
+.footer__details__artist {
+  margin-bottom: 0.25rem;
+}
+
+.footer_next-button {
+  color: white;
+  align-self: center;
+  padding: 0 0.75rem 0 0.75rem;
+}
