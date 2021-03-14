@@ -2,7 +2,6 @@ class App {
   constructor() {
     this.go();
   }
-
   go() {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
@@ -18,7 +17,6 @@ class App {
   checkLocalStorage() {
     let lastclear = localStorage.getItem("lastclear");
     let now = new Date().getTime();
-    console.log(now - lastclear);
     if (now - lastclear < 1000 * 60 * 60) {
       if (
         localStorage.getItem("temp") === null &&
@@ -33,26 +31,6 @@ class App {
       return false;
     }
   }
-
-  // getKeys(key) {
-  //   let result;
-  //   return fetch("data.json")
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((json) => {
-  //       switch (key) {
-  //         case "ytapikey":
-  //           result = json.YT_API_KEY;
-  //           console.log(result);
-  //           break;
-  //         case "weatherapikey":
-  //           result = json.WEATHER_API_KEY;
-  //           break;
-  //       }
-  //       return result;
-  //     });
-  // }
 
   getWeather(lat, lng) {
     fetch("data.json")
@@ -72,7 +50,6 @@ class App {
             let temp = json.main.temp;
             localStorage.setItem("temp", temp);
             let weatherId = json.weather[0].id;
-            console.log(weatherId);
             localStorage.setItem("weatherId", weatherId);
             localStorage.setItem("lastclear", new Date().getTime());
             let status = this.checkCondition(weatherId, temp);
@@ -169,7 +146,6 @@ class App {
         let channelId = json.items[0].snippet.channelId;
 
         url = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${ytapikey}`;
-        console.log(url);
         fetch(url)
           .then((response) => {
             return response.json();
@@ -192,8 +168,6 @@ class App {
     let videoId = localStorage.getItem("videoId");
     let channelName = localStorage.getItem("channelName");
     let channelIcon = localStorage.getItem("channelIcon");
-    console.log(channelIcon);
-
     let background = localStorage.getItem("background");
     let title = localStorage.getItem("title");
     let subtitle = localStorage.getItem("subtitle");
@@ -201,15 +175,11 @@ class App {
     document.querySelector(".top").style.backgroundImage = `url(${background})`;
     document.querySelector(".main__weather").innerHTML = title;
     document.querySelector(".main__bottom__subtitle").innerHTML = subtitle;
-
     document.querySelector(".footer__details__artist").innerHTML = channelName;
-
     document.querySelector(".footer__details__song").innerHTML = videoTitle;
-
     document.querySelector(
       ".footer__play-button-background"
     ).style.backgroundImage = `url(${channelIcon})`;
-
     document
       .querySelector(".footer__play-button__link")
       .setAttribute("href", `https://music.youtube.com/watch?v=${videoId}`);
