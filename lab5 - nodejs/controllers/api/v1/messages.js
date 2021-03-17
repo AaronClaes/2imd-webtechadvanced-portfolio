@@ -1,26 +1,14 @@
 const Message = require("../../../models/Message");
 
+//GET api/v1/messages
 const getAll = (req, res) => {
-  res.send("getAll");
-};
-
-const getOne = (req, res) => {
-  res.send("getOne");
-};
-
-const create = (req, res, next) => {
-  let message = new Message();
-  message.text = req.body.text;
-  message.from = req.body.from;
-  message.to = req.body.to;
-  message.save((err, doc) => {
+  Message.find({}, (err, doc) => {
     if (err) {
       res.json({
         status: "error",
-        message: "Couldnot save this message",
+        message: "Couldnot find the messages",
       });
     }
-
     if (!err) {
       res.json({
         status: "success",
@@ -32,12 +20,100 @@ const create = (req, res, next) => {
   });
 };
 
-const updateOne = (req, res) => {
-  res.send("updateOne");
+//GET api/v1/messages/:id
+const getOne = (req, res) => {
+  userId = req.params.id;
+  Message.findOne({ _id: `${userId}` }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: "error",
+        message: `Couldnot find a user with id: ${userId}`,
+      });
+    }
+    if (!err) {
+      res.json({
+        status: "success",
+        data: {
+          message: doc,
+        },
+      });
+    }
+  });
 };
 
+//POST api/v1/messages
+const create = (req, res, next) => {
+  let message = new Message();
+  message.text = req.body.text;
+  message.user = req.body.user;
+  message.save((err, doc) => {
+    if (err) {
+      res.json({
+        status: "error",
+        message: "Couldnot save this message",
+      });
+    }
+    if (!err) {
+      res.json({
+        status: "success",
+        data: {
+          message: doc,
+        },
+      });
+    }
+  });
+};
+
+//PUT api/v1/messages/:id
+const updateOne = (req, res) => {
+  userId = req.params.id;
+  Message.findOneAndUpdate(
+    { _id: `${userId}` },
+    {
+      text: `${req.body.text}`,
+      user: `${req.body.user}`,
+    },
+    {
+      returnOriginal: false,
+    },
+    (err, doc) => {
+      if (err) {
+        res.json({
+          status: "error",
+          message: `Couldnot update a user with id: ${userId}`,
+        });
+      }
+      if (!err) {
+        res.json({
+          status: "success",
+          data: {
+            message: doc,
+          },
+        });
+      }
+    }
+  );
+};
+
+//DELETE api/v1/messages/:id
 const deleteOne = (req, res) => {
-  res.send("deleteOne");
+  userId = req.params.id;
+  Message.findOneAndDelete({ _id: `${userId}` }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: "error",
+        message: `Couldnot delete a user with id: ${userId}`,
+      });
+    }
+    if (!err) {
+      res.json({
+        status: "success",
+        data: {
+          message: "the message was removed",
+        },
+      });
+    }
+  });
 };
 
 module.exports.getAll = getAll;
