@@ -24,7 +24,7 @@ let messagesRouter = require("./routes/api/v1/messages");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "pug");
+app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.render("index");
 });
 
 app.use("/api/v1/messages", messagesRouter);
