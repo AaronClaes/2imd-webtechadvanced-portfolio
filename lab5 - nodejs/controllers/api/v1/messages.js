@@ -1,13 +1,4 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
-
-const messageSchema = new Schema({
-  text: String,
-  from: String,
-  to: String,
-});
-
-const Message = mongoose.model("Message", messageSchema);
+const Message = require("../../../models/Message");
 
 const getAll = (req, res) => {
   res.send("getAll");
@@ -17,12 +8,19 @@ const getOne = (req, res) => {
   res.send("getOne");
 };
 
-const create = (req, res) => {
+const create = (req, res, next) => {
   let message = new Message();
-  message.text = "This is a message!";
-  message.from = "Aaron";
-  message.to = "Timmy";
+  message.text = req.body.text;
+  message.from = req.body.from;
+  message.to = req.body.to;
   message.save((err, doc) => {
+    if (err) {
+      res.json({
+        status: "error",
+        message: "Couldnot save this message",
+      });
+    }
+
     if (!err) {
       res.json({
         status: "success",
