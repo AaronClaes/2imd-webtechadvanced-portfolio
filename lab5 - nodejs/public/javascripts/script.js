@@ -6,6 +6,6 @@ fetch("/api/v1/messages")
       let ul = document.querySelector(".messagesList");
       let li = document.createElement("li");
       ul.appendChild(li);
-      li.textContent = message.text;
+      li.textContent = `${message.user}: ${message.text}`;
     });
   });
