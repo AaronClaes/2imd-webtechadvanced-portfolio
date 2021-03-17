@@ -2,28 +2,50 @@ const Message = require("../../../models/Message");
 
 //GET api/v1/messages
 const getAll = (req, res) => {
-  Message.find({}, (err, doc) => {
-    if (err) {
-      res.json({
-        status: "error",
-        message: "Couldnot find the messages",
-      });
-    }
-    if (!err) {
-      res.json({
-        status: "success",
-        data: {
-          message: doc,
-        },
-      });
-    }
-  });
+  let query = req.query;
+  let username = req.query.user;
+  console.log(query);
+  if (Object.keys(query).length === 0) {
+    Message.find({}, (err, doc) => {
+      if (err) {
+        res.json({
+          status: "error",
+          message: "Couldnot find the messages",
+        });
+      }
+      if (!err) {
+        res.json({
+          status: "success",
+          data: {
+            message: doc,
+          },
+        });
+      }
+    });
+  } else {
+    Message.find({ user: username }, (err, doc) => {
+      if (err) {
+        res.json({
+          status: "error",
+          message: `Couldnot find a user with username: ${username}`,
+        });
+      }
+      if (!err) {
+        res.json({
+          status: "success",
+          data: {
+            message: doc,
+          },
+        });
+      }
+    });
+  }
 };
 
 //GET api/v1/messages/:id
 const getOne = (req, res) => {
   userId = req.params.id;
-  Message.findOne({ _id: `${userId}` }, (err, doc) => {
+  Message.findOne({ _id: userId }, (err, doc) => {
     if (err) {
       res.json({
         status: "error",
