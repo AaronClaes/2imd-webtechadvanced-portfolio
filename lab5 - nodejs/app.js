@@ -6,6 +6,19 @@ let logger = require("morgan");
 
 let app = express();
 
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/messagesDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log("connected");
+  // we're connected!
+});
+
 let messagesRouter = require("./routes/api/v1/messages");
 
 // view engine setup
@@ -17,6 +30,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
 
 app.use("/api/v1/messages", messagesRouter);
 
