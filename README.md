@@ -27,3 +27,13 @@ Heroku does not allow it to deploy a nodejs project that is not in the root dire
 [Repository used for heroku](https://github.com/AaronClaes/lab5-nodejs-messagesAPI)
 
 [Live hosted project with heroku and mongoDB Atlas](https://still-forest-14417.herokuapp.com/)
+
+### Lab 6 - web sockets:
+
+[Live app on Heroku (stats page)](https://afternoon-citadel-75816.herokuapp.com/)
+
+[Live app on Heroku (dashboard page)](https://afternoon-citadel-75816.herokuapp.com/updatestats)
+
+[github repo](https://github.com/AaronClaes/lab6-websockets)
+
+![gif with proof](https://media.giphy.com/media/jEcifBv7jXN4h43VGs/giphy.gif)
